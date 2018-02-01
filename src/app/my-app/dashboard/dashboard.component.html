@@ -1,0 +1,66 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <ng-template ngFor let-person [ngForOf]= "allPersons" let-i="index">
+    <p>{{i + 1}}. {{person.name}} : {{person.age}} </p>
+  </ng-template>
+</div>
+<div>
+  <ng-template ngFor let-item [ngForOf]="allPersons" let-i="index" let-o="odd" let-e="even" let-f="first" let-l="last" [ngForTrackBy]="trackByFn" >
+    <p>{{i + 1}}. {{item.name}} : {{item.age}} -  {{l}} </p>
+  </ng-template>
+</div>
+<div style="padding: 15px;">
+  <div class="c-grid">
+    <table class="c-grid-table">
+      <thead>
+      <th width="150">Sl No</th>
+      <th width="150">First Name</th>
+      <th width="150">Last Name</th>
+      <th width="150">Mobile no</th>
+      <th width="150">E-Mail</th>
+      <th width="150">Address</th>
+      <th width="150">Male</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>Rmavath</td>
+        <td>Bhagath</td>
+        <td>8142456609</td>
+        <td>bhagath@cigniti.com</td>
+        <td>LB Nagar</td>
+        <td>Gendar</td>
+      </tr>
+      <tr>
+        <td colspan="7" class="c-grid-row-children">
+          <div class="c-grid-row-group"> Name here</div>
+          <table class="c-grid-row-children-table">
+            <tbody>
+            <tr>
+              <td width="150">1</td>
+              <td width="150">Rmavath</td>
+              <td width="150">Bhagath</td>
+              <td width="150">8142456609</td>
+              <td width="150">bhagath@cigniti.com</td>
+              <td width="150">LB Nagar</td>
+              <td width="150">Gendar</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  <h4>ng-template example</h4>
+  <div>
+    <ng-template>
+      <p>Hello ng-template</p>
+    </ng-template>
+  </div>
+</div>
+
+

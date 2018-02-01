@@ -1,0 +1,10 @@
+<div>
+  <button class="btn btn-default" (click)="toggleOpen()">Toggle open</button>
+  <div *appIfElse="isOpen">
+    <p>Some txt shown here</p>
+  </div>
+  <ng-template [appIfElse]="isOpen">
+    <p>Some txt shown here in ng-template</p>
+  </ng-template>
+  <div [appToggleInput]="isOpen"> value updates</div>
+</div>

@@ -1,0 +1,8 @@
+.modal-c{
+  position: absolute;
+  left: 50%;
+  top: -300px;
+  width: auto;
+  min-width: 600px;
+  transition: all 250ms ease-in-out;
+}
