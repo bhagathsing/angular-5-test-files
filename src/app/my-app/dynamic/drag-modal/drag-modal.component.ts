@@ -12,13 +12,16 @@ export class DragModalComponent implements OnInit, AfterViewInit {
   constructor(private testService: TestService, private elRef: ElementRef) { }
 
   ngOnInit() {
-    console.log(this.elRef);
   }
   ngAfterViewInit() {
    this.setModalWidth();
   }
-  close() {
-    this.testService.closeModal(this.componentIndex);
+  close(evt) {
+    const ele = this.elRef.nativeElement.querySelector('.modal-dialog');
+    ele.style.top = '-300px';
+    setTimeout(() => {
+      this.testService.closeModal(evt, this.componentIndex);
+    }, 200);
   }
   setModalWidth() {
     const ele = this.elRef.nativeElement.querySelector('.modal-dialog');

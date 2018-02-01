@@ -25,7 +25,11 @@ export class TestModalComponent implements OnInit {
   }
   ngOnInit() {}
   openModal() {
-    this.testService.open();
+    this.testService.open().then(() => {
+
+    }).catch(() => {
+      console.log('hi close');
+    });
   }
 
 }
