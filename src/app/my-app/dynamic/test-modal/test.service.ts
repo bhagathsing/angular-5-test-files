@@ -1,6 +1,6 @@
 import {ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Type} from '@angular/core';
 import {DragModalComponent} from '../drag-modal/drag-modal.component';
-
+import {ModalControl} from '../drag-modal/drag-modal-ctl';
 @Injectable()
 export class TestService {
   private  modalComponent: Type<any> =  DragModalComponent;
@@ -12,6 +12,7 @@ export class TestService {
   private sendConfirmResult: () => any;
   private sendCancelResult: () => any;
 
+  modalCtl: ModalControl = new ModalControl();
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
@@ -30,15 +31,17 @@ export class TestService {
 
     component.instance.componentIndex = this.components.length + 1;
     this.components.push(component);
-
     this.appRef.attachView(component.hostView);
 
     const domElem = (component.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
     document.body.appendChild(domElem);
-    return new Promise<any>((resolve, reject) => {
-      this.buildDialogResponses(resolve, reject);
-    });
+
+    // return new Promise<any>((resolve, reject) => {
+    //   this.buildDialogResponses(resolve, reject);
+    // });
+    this.modalCtl = new ModalControl();
+    return this.modalCtl;
   }
 
   private buildDialogResponses(resolve, reject): any {
@@ -52,17 +55,30 @@ export class TestService {
     };
   }
 
-  public onConfirmClick(event: Event): void {
-    event.preventDefault();
-    this.sendConfirmResult();
+  public onConfirmClick(evt: Event, index): void {
+    evt.preventDefault();
+    //this.sendConfirmResult();
+    this.closeModalWindow(index);
+    this.modalCtl.close('ok');
   }
 
-  public onCancelClick(event: Event): void {
-    event.preventDefault();
-    this.sendCancelResult();
+  public onCancelClick(evt: Event, index): void {
+    evt.preventDefault();
+   // this.sendCancelResult();
+    this.closeModalWindow(index);
+    this.modalCtl.close('cancel');
   }
-
-  public closeModal( evt, index ) {
+  public onDissmiss(evt: Event, index): void {
+    evt.preventDefault();
+    this.closeModalWindow(index);
+    this.modalCtl.dismiss('dissmiss');
+  }
+  //
+  // public closeModal( evt, index ) {
+  //   this.closeModalWindow(index);
+  //   this.onCancelClick(evt);
+  // }
+  private closeModalWindow(index ) {
     let componentIndex = index - 1;
     if (componentIndex !== -1) {
       let obj =  this.components[componentIndex];
@@ -70,8 +86,5 @@ export class TestService {
       obj.destroy();
       this.components.splice(componentIndex, 1);
     }
-    this.onCancelClick(evt);
   }
-
-
 }

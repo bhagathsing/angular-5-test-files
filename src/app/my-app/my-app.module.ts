@@ -22,6 +22,7 @@ import { TestModalComponent } from './dynamic/test-modal/test-modal.component';
 import { FooComponent } from './dynamic/test-modal/foo/foo.component';
 import {TestService} from './dynamic/test-modal/test.service';
 import {BrowserModule} from '@angular/platform-browser';
+
 @NgModule({
   imports: [
     CommonModule,
